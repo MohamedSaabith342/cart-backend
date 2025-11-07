@@ -1,5 +1,6 @@
 package com.example.ecommerce.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,15 @@ public class ProductController {
 		Product product = productService.getProductById(id);
 		System.out.println(product.getDescription());
 		return productService.getProductById(id);
+	}
+	
+	@GetMapping("/search")
+	public List<Product> searchProducts(
+			@RequestParam(required = false) String category, 
+			@RequestParam(required = false) Double minPrice, 
+			@RequestParam(required = false) Double maxPrice, 
+			@RequestParam(required = false) String keyWord ) {
+		return productService.searchProducts(category, minPrice, maxPrice, keyWord);
 	}
 
 }

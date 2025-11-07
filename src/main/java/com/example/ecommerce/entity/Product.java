@@ -36,6 +36,36 @@ public class Product {
 	
 	private String description;
 	
+	private String category;
+	
+	public String getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
+	public List<ProductImage> getImages() {
+		return images;
+	}
+
+
+	public void setImages(List<ProductImage> images) {
+		this.images = images;
+	}
+
+
+	public List<ProductReview> getReviews() {
+		return reviews;
+	}
+
+
+	public void setReviews(List<ProductReview> reviews) {
+		this.reviews = reviews;
+	}
 	private Double ratings = 0.0;
 	
 	@NotBlank(message = "seller is field requird")
@@ -55,7 +85,7 @@ public class Product {
 	
 	
 	
-	public Product(Long id, String name, Double price, String description, Double ratings, String seller, Integer stock
+	public Product(Long id, String name, Double price,String category, String description, Double ratings, String seller, Integer stock
 			) {
 		super();
 		this.id = id;
@@ -65,6 +95,7 @@ public class Product {
 		this.ratings = ratings;
 		this.seller = seller;
 		this.stock = stock;
+		this.category = category;
 	
 	}
 	

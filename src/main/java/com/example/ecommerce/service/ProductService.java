@@ -2,16 +2,19 @@ package com.example.ecommerce.service;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.ecommerce.entity.Product;
 import com.example.ecommerce.repository.ProductRepository;
+import com.example.ecommerce.spec.ProductSpecification;
 
 @Service
 public class ProductService {
@@ -34,11 +37,15 @@ public class ProductService {
 	public Product getProductById(Long id) {
 		return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found with the id" + id));
 	}
-
-
 	
-
 	
+	public List<Product> searchProducts(String category, Double minPrice, Double maxPrice, String keyWord) {
+		Specification<Product> spec = Specification.where(ProductSpecification.hasCategory(category));
+		
+		return productRepository.findAll(spec);
+	}
+
+
 	
 	
 	
