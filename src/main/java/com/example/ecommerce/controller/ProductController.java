@@ -36,8 +36,9 @@ public class ProductController {
 			@RequestParam(required = false) String category, 
 			@RequestParam(required = false) Double minPrice, 
 			@RequestParam(required = false) Double maxPrice, 
-			@RequestParam(required = false) String keyWord ) {
-		return productService.searchProducts(category, minPrice, maxPrice, keyWord);
+			@RequestParam(required = false) String keyWord,
+			@RequestParam(required = false)  Double ratings) {
+		return productService.searchProducts(category, minPrice, maxPrice, keyWord, ratings);
 	}
 
 }
