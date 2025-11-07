@@ -18,7 +18,17 @@ public class ProductSpecification {
 			return cb.between(root.get("price"),min, max);
 		};
 	}
+	
+	public static Specification<Product> hasNameOrDescription(String keyWord){
+		return (root, query, cb) -> {
+		if(keyWord == null || keyWord.isEmpty()) return null;
+		return cb.or(
+				cb.like(root.get("name"),"%"+keyWord.toLowerCase()+"%"),
+				cb.like(root.get("description"), "%"+keyWord.toLowerCase()+"%"));
+	};
+	}
 
+	
 	
 
 	
