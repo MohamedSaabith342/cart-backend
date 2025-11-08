@@ -12,14 +12,20 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.example.ecommerce.dto.ProductReviewDto;
 import com.example.ecommerce.entity.Product;
+import com.example.ecommerce.entity.ProductReview;
 import com.example.ecommerce.repository.ProductRepository;
+import com.example.ecommerce.repository.ProductReviewRepository;
 import com.example.ecommerce.spec.ProductSpecification;
 
 @Service
 public class ProductService {
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private ProductReviewRepository productReviewRepository;
 	
 	public Map<String, Object> getAllProducts(int page, int size) {
 		
@@ -47,6 +53,23 @@ public class ProductService {
 		
 		return productRepository.findAll(spec);
 	}
+	
+	
+	public void addReview(ProductReviewDto reviewDto) {
+		Product product = productRepository.findById(reviewDto.getProductId()).orElseThrow( () -> new RuntimeException("Product not found"));
+		
+	
+		ProductReview review = new ProductReview();
+		review.setComment(reviewDto.getComment());
+		review.setRating(reviewDto.getRating());
+		review.setProduct(product);
+		
+		productReviewRepository.save(review);
+		
+	}
+
+
+	
 
 
 	

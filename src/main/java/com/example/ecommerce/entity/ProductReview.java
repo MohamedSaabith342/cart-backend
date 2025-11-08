@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
@@ -15,16 +17,24 @@ public class ProductReview {
 	
 	@Min(value = 1)
 	@Max(value =5)
-	private Integer rating;
+	private Double rating;
 	
 	private String comment;
 
-	public ProductReview(Long id, @Min(1) @Max(5) Integer rating, String comment) {
+	public ProductReview(Long id, @Min(1) @Max(5) Double rating, String comment) {
 		super();
 		Id = id;
 		this.rating = rating;
 		this.comment = comment;
 	}
+	
+	
+
+	public ProductReview() {
+		super();
+	}
+
+
 
 	public Long getId() {
 		return Id;
@@ -34,11 +44,11 @@ public class ProductReview {
 		Id = id;
 	}
 
-	public Integer getRating() {
+	public Double getRating() {
 		return rating;
 	}
 
-	public void setRating(Integer rating) {
+	public void setRating(Double rating) {
 		this.rating = rating;
 	}
 
@@ -49,5 +59,23 @@ public class ProductReview {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	
+	@ManyToOne()
+	@JoinColumn(name="product_id")
+	private Product product;
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+
+
+	
+	
+	
 
 }
